@@ -2,7 +2,50 @@
 
 该仿真平台使用gazebo plugin的形式，消除ros通信不同步对控制的影响。同时，提供了基于Rviz2的可视化工具，将机器人状态的lcm数据转发到ROS。
 
+详细信息可参照[**仿真平台文档**](https://miroboticslab.github.io/blogs/#/cn/cyberdog_gazebo_cn)
+
 推荐安装环境： Ubuntu 20.04 + ROS2 Galactic
+
+## 依赖安装
+运行仿真平台需要安装如下的依赖  
+**ros2_Galactic** 
+```
+$ sudo apt update && sudo apt install curl gnupg lsb-release
+$ sudo curl -sSL https://raw.githubusercontent.com/ros/rosdistro/master/ros.key -o /usr/share/keyrings/ros-archive-keyring.gpg
+$ echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/ros-archive-keyring.gpg] http://packages.ros.org/ros2/ubuntu $(source /etc/os-release && echo $UBUNTU_CODENAME) main" | sudo tee /etc/apt/sources.list.d/ros2.list > /dev/null
+$ sudo apt update
+$ sudo apt install ros-galactic-desktop
+```
+**Gazebo**
+```
+$ curl -sSL http://get.gazebosim.org | sh
+$ sudo apt install ros-galactic-gazebo-ros
+$ sudo apt install ros-galactic-gazebo-msgs
+```
+**LCM**
+```
+$ git clone https://github.com/lcm-proj/lcm.git
+$ cd lcm
+$ mkdir build
+$ cd build
+$ cmake -DLCM_ENABLE_JAVA=ON ..
+$ make
+$ sudo make install
+```
+**Eigen**
+```
+$ git clone https://github.com/eigenteam/eigen-git-mirror
+$ cd eigen-git-mirror
+$ mkdir build
+$ cd build
+$ cmake ..
+$ sudo make install
+```
+**xacro**
+```
+$ sudo apt install ros-galactic-xacro
+```
+注意：若环境中安装有其他版本的yaml-cpp，可能会与ros galactic 自带的yaml-cpp发生冲突，建议编译时环境中无其他版本yaml-cpp
 
 ## 下载
 ```
