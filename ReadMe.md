@@ -17,7 +17,7 @@ $ git submodule update --init --recursive
 然后需要在cyberdog_sim文件夹下进行编译
 ```
 $ source /opt/ros/galactic/setup.bash 
-$ colcon build --merge-install --symlink-install --packages-up-to cyberdog_locomotion cyberdog_ros2
+$ colcon build --merge-install --symlink-install --packages-up-to cyberdog_locomotion cyberdog_simulator
 ```
 
 ## 使用
