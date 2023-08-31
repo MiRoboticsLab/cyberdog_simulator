@@ -9,8 +9,6 @@
 $ git clone https://github.com/MiRoboticsLab/cyberdog_sim.git
 $ cd cyberdog_sim
 $ vcs import < cyberdog_sim.repos
-$ cd src/cyberdog_locomotion
-$ git submodule update --init --recursive
 ```
 ## 编译
 需要将src/cyberdog locomotion/CMakeLists.txt中的BUILD_ROS置为ON
@@ -23,7 +21,7 @@ $ colcon build --merge-install --symlink-install --packages-up-to cyberdog_locom
 ## 使用
 需要在cyberdog_sim文件夹下运行
 ```
-$ python3 src/cyberdog_ros2/cyberdog_gazebo/script/launchsim.py
+$ python3 src/cyberdog_simulator/cyberdog_gazebo/script/launchsim.py
 ```
 
 ### 也可以通过以下命令分别运行各程序：
