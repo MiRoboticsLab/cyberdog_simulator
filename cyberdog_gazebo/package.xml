@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
+<package format="3">
+  <name>cyberdog_gazebo</name>
+  <version>0.0.0</version>
+  <description>The cyberdog_gazebo package</description>
+
+  <maintainer email="lijunhong1@xiaomi.com">ljh</maintainer>
+  <maintainer email="youyangwei1@xiaomi.com">You Yangwei</maintainer>
+
+  <!-- One license tag required, multiple allowed, one license per tag -->
+  <!-- Commonly used license strings: -->
+  <!--   BSD, MIT, Boost Software License, GPLv2, GPLv3, LGPLv2.1, LGPLv3 -->
+  <license>Apache License, Version 2.0</license>
+  
+    <buildtool_depend>ament_cmake</buildtool_depend>
+
+    <build_depend>cyberdog_msg</build_depend>
+
+    <depend>rclcpp</depend>
+    <depend>gazebo_msgs</depend>
+    <depend>gazebo_dev</depend>
+    <depend>gazebo_ros</depend>
+    <depend>yaml_cpp_vendor</depend>
+
+    <export>
+        <build_type>ament_cmake</build_type>
+    </export>
+</package>
