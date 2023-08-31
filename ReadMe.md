@@ -1,6 +1,7 @@
 # CyberDog simulator
 
 该仿真平台使用gazebo plugin的形式，消除ros通信不同步对控制的影响。同时，提供了基于Rviz2的可视化工具，将机器人状态的lcm数据转发到ROS。
+该仿真平台需和cyberdog_locomotion仓通信进行使用，建议通过cyberdog_sim仓进行安装
 
 详细信息可参照[**仿真平台文档**](https://miroboticslab.github.io/blogs/#/cn/cyberdog_gazebo_cn)
 
