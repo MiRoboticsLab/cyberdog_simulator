@@ -35,15 +35,19 @@ typedef map<string, JointPtr > URDFJointMap;
           this->declare_parameter((a), (c));\
           (b) = get_parameter(a).as_string();\
 
+#define param_bool(a,b,c) \
+          this->declare_parameter((a), (c));\
+          (b) = get_parameter(a).as_bool();\
 
 namespace cyberdog
 {
-	CyberDogVisual::CyberDogVisual():Node("CyberDogVisual"),odom_lcm_("udpm://239.255.76.67:7669?ttl=255"),
+	CyberDogVisual::CyberDogVisual():Node("CyberDogVisual"),odom_lcm_("udpm://239.255.76.67:7669?ttl=255"),odom_global_lcm_("udpm://239.255.76.67:7667?ttl=255"),
 	joint_lcm_("udpm://239.255.76.67:7667?ttl=255")
 	{
 		param_double("publish_frequency", publish_frequency_, 0.0);
 		param_string("joint_state_topic", joint_state_topic_, "");
 		param_string("robot_description", urdf_string, "");
+		param_bool("use_state_estimator", use_state_estimator_, false);
 		ReadParameters();
 
 		//js_pub_ = n_.advertise<sensor_msgs::JointState>(joint_state_topic_, 5);
@@ -67,7 +71,13 @@ namespace cyberdog
 			exit(1);
 		}
 
-		odom_lcm_.subscribe("state_estimator", &CyberDogVisual::HandleOdomMessage, this);
+		if(use_state_estimator_){
+			odom_lcm_.subscribe("state_estimator", &CyberDogVisual::HandleOdomMessage, this);
+		}
+		else{
+			odom_global_lcm_.subscribe("global_to_robot", &CyberDogVisual::HandleGlobalOdomMessage, this);
+		}
+
 		joint_lcm_.subscribe("leg_control_data", &CyberDogVisual::HandleJointMessage, this);
 		
 		tf2::Duration check_period = tf2::durationFromSec(1/publish_frequency_);
@@ -83,7 +93,12 @@ namespace cyberdog
 	//publishes output in given fixed rate
 	void CyberDogVisual::UpdateTimerCallback()
 	{
-		odom_lcm_.handle();
+		if(use_state_estimator_){
+			odom_lcm_.handle();
+		}
+		else{
+			odom_global_lcm_.handle();
+		}
 		joint_lcm_.handle();
 	}
 
@@ -109,6 +124,40 @@ namespace cyberdog
 
 		//q.setValue( msg->quat[1], msg->quat[2], msg->quat[3], msg->quat[0]);
 		//transform.setRotation(q);
+		transform.transform.rotation = geoQuat;
+		transform.header.stamp = this->get_clock()->now();
+		transform.header.frame_id  = "vodom";
+		transform.child_frame_id = root_link_;
+		//br_.sendTransform(tf::StampedTransform(transform, ros::Time::now(), "odom", root_link_));
+		br_->sendTransform(transform);
+	}
+
+	void CyberDogVisual::HandleGlobalOdomMessage(const lcm::ReceiveBuffer *rbuf, const std::string &chan, const localization_lcmt *msg){
+
+		// std::cout << "handling message" << std::endl;
+		// RCLCPP_INFO(this->get_logger(), "handling message.");
+		(void) rbuf;
+		(void) chan;
+
+		//tf::Transform transform;
+		geometry_msgs::msg::TransformStamped transform;
+
+		//transform.setOrigin(tf::Vector3(msg->p[0], msg->p[1], msg->p[2]));
+		transform.transform.translation.x = msg->xyz[0];
+		transform.transform.translation.y = msg->xyz[1];
+		transform.transform.translation.z = msg->xyz[2];
+
+		Eigen::AngleAxisd rollAngle(Eigen::AngleAxisd(msg->rpy[0],Eigen::Vector3d::UnitX()));
+		Eigen::AngleAxisd pitchAngle(Eigen::AngleAxisd(msg->rpy[1],Eigen::Vector3d::UnitY()));
+		Eigen::AngleAxisd yawAngle(Eigen::AngleAxisd(msg->rpy[2],Eigen::Vector3d::UnitZ()));
+		
+		Eigen::Quaterniond quaternion;
+		quaternion = yawAngle * pitchAngle * rollAngle;
+
+		tf2::Quaternion q(quaternion.x(), quaternion.y(), quaternion.z(),quaternion.w());
+		geometry_msgs::msg::Quaternion geoQuat;
+		tf2::convert(q, geoQuat);
+
 		transform.transform.rotation = geoQuat;
 		transform.header.stamp = this->get_clock()->now();
 		transform.header.frame_id  = "vodom";

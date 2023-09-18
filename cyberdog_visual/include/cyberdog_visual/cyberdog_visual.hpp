@@ -15,6 +15,7 @@
 #pragma once
 
 #include <iostream>
+#include <Eigen/Dense>
 #include "rclcpp/rclcpp.hpp"
 #include <sensor_msgs/msg/joint_state.hpp>
 #include <tf2_ros/transform_broadcaster.h>
@@ -29,6 +30,7 @@
 #include "leg_control_data_lcmt.hpp"
 #include "state_estimator_lcmt.hpp"
 #include "simulator_lcmt.hpp"
+#include "localization_lcmt.hpp"
 
 namespace cyberdog
 {
@@ -65,11 +67,20 @@ namespace cyberdog
     void HandleOdomMessage(const lcm::ReceiveBuffer *rbuf, const std::string &chan, const state_estimator_lcmt *msg);
 
     /**
+     * @brief Handle global to robot lcm messages
+     * 
+     * @param rbuf : buffer receive lcm messages 
+     * @param chan : the channel to subscribe the lcm message
+     * @param msg  : the global to robot message
+     */
+    void HandleGlobalOdomMessage(const lcm::ReceiveBuffer *rbuf, const std::string &chan, const localization_lcmt *msg);
+    
+    /**
      * @brief Handle joint states messages
      * 
      * @param rbuf : buffer receive lcm messages 
      * @param chan : the channel to subscribe the lcm message
-     * @param msg  : the Odom message
+     * @param msg  : the joint states message
      */
     void HandleJointMessage(const lcm::ReceiveBuffer *rbuf, const std::string &chan, const leg_control_data_lcmt *msg);
 
@@ -93,6 +104,7 @@ namespace cyberdog
 		sensor_msgs::msg::JointState js_;
 
     lcm::LCM odom_lcm_;
+    lcm::LCM odom_global_lcm_;
     lcm::LCM joint_lcm_;
 
     std::string joint_state_topic_;
@@ -100,5 +112,7 @@ namespace cyberdog
     std::string root_link_;
     std::string urdf_string;
     double publish_frequency_;
+
+    bool use_state_estimator_;
   };
 }

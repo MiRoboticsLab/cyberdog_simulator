@@ -36,6 +36,7 @@ set(dependencies
   gazebo_msgs
   urdf
   lcm
+  Eigen3
 )
 
 include_directories(
