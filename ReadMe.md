@@ -107,3 +107,21 @@ $ source /opt/ros/galactic/setup.bash
 $ source install/setup.bash
 $ ros2 launch cyberdog_visual cyberdog_visual.launch.py
 ```
+
+### 播放实机lcm log数据
+该平台能够通过rviz2将实机的运动控制lcm数据进行播放和可视化。  
+操作方法如下：
+运行lcm数据可视化界面，于cyberdog_sim文件夹下进行如下操作：
+```
+$ source /opt/ros/galactic/setup.bash
+$ source install/setup.bash
+$ ros2 launch cyberdog_visual cyberdog_lcm_repaly.launch.py
+```
+打开可视化界面后，通过运行cyberdog_locomotion仓的script目录下的脚本播放lcm log数据。  
+于cyberdog_sim文件夹下进行如下操作：
+```
+$ cd src/cyberdog_locomotion/scripts
+$ ./make_types.sh #初次使用时需要运行
+$ ./launch_lcm_logplayer.sh
+```
+运行后选择需要播放的lcm log文件，即可进行log数据的播放，此时通过rviz可视化界面能复现机器人的姿态。
