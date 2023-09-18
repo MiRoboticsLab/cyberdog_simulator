@@ -46,6 +46,17 @@ $ sudo make install
 ```
 $ sudo apt install ros-galactic-xacro
 ```
+
+**vcstool**
+```
+$ sudo apt install python3-vcstool
+```
+
+**colcon**
+```
+$ sudo apt install python3-colcon-common-extensions
+```
+
 注意：若环境中安装有其他版本的yaml-cpp，可能会与ros galactic 自带的yaml-cpp发生冲突，建议编译时环境中无其他版本yaml-cpp
 
 ## 下载
