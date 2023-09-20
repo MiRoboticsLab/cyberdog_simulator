@@ -3,12 +3,9 @@ Panels:
     Help Height: 78
     Name: Displays
     Property Tree Widget:
-      Expanded:
-        - /Global Options1
-        - /Status1
-        - /RobotModel1
+      Expanded: ~
       Splitter Ratio: 0.5
-    Tree Height: 787
+    Tree Height: 814
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -45,7 +42,7 @@ Visualization Manager:
         Y: 0
         Z: 0
       Plane: XY
-      Plane Cell Count: 10
+      Plane Cell Count: 100
       Reference Frame: <Fixed Frame>
       Value: true
     - Alpha: 1
@@ -260,7 +257,7 @@ Visualization Manager:
       Visual Enabled: true
   Enabled: true
   Global Options:
-    Background Color: 48; 48; 48
+    Background Color: 238; 238; 236
     Fixed Frame: vodom
     Frame Rate: 30
   Name: root
@@ -304,33 +301,33 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 7.835887908935547
+      Distance: 2.080484628677368
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0
-        Y: 0
-        Z: 0
+        X: 0.1307464987039566
+        Y: -0.24448007345199585
+        Z: -0.031345635652542114
       Focal Shape Fixed Size: false
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.7853981852531433
+      Pitch: 0.16039833426475525
       Target Frame: base_link
       Value: Orbit (rviz_default_plugins)
-      Yaw: 0.7853981852531433
+      Yaw: 3.4303975105285645
     Saved: ~
 Window Geometry:
   Displays:
     collapsed: false
-  Height: 1016
+  Height: 1043
   Hide Left Dock: false
   Hide Right Dock: false
-  QMainWindow State: 000000ff00000000fd0000000100000000000001560000039efc0200000005fb000000100044006900730070006c006100790073010000003d0000039e000000c900fffffffb0000001200530065006c0065006300740069006f006e000000016e000000890000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001a6000000a20000005c00fffffffb0000000a0056006900650077007300000001f600000163000000a400fffffffb0000000800540069006d0065000000030f000000cc0000003900ffffff000005dc0000039e00000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
+  QMainWindow State: 000000ff00000000fd000000010000000000000156000003b9fc0200000005fb000000100044006900730070006c006100790073010000003d000003b9000000c900fffffffb0000001200530065006c0065006300740069006f006e000000016e000000890000005c00fffffffb0000001e0054006f006f006c002000500072006f007000650072007400690065007300000001a6000000a20000005c00fffffffb0000000a0056006900650077007300000001f600000163000000a400fffffffb0000000800540069006d0065000000030f000000cc0000003900ffffff00000624000003b900000004000000040000000800000008fc0000000100000002000000010000000a0054006f006f006c00730100000000ffffffff0000000000000000
   Selection:
     collapsed: false
   Time:
@@ -339,6 +336,6 @@ Window Geometry:
     collapsed: false
   Views:
     collapsed: false
-  Width: 1848
-  X: 72
-  Y: 27
+  Width: 1920
+  X: 1920
+  Y: 0
