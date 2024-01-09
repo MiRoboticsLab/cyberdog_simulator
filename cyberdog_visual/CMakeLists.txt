@@ -22,7 +22,6 @@ find_package(tf2_eigen REQUIRED)
 find_package(tf2_geometry_msgs REQUIRED)
 find_package(tf2_ros REQUIRED)
 find_package(sensor_msgs REQUIRED)
-find_package(gazebo_msgs REQUIRED)
 find_package(lcm REQUIRED)
 find_package(urdf REQUIRED)
 set(dependencies
@@ -33,7 +32,6 @@ set(dependencies
   tf2_geometry_msgs
   tf2_ros
   sensor_msgs
-  gazebo_msgs
   urdf
   lcm
   Eigen3
