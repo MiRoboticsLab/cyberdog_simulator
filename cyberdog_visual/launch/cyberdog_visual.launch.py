@@ -49,7 +49,7 @@ def launch_setup(context, *args, **kwargs):
                     'robot_description': urdf_contents,
                     'publish_frequency': 500.0,
                     'joint_state_topic': 'joint_states',
-                    # 'use_sim_time': use_sim_time
+                    'use_sim_time': use_sim_time
                     }
                     ]
     )
@@ -64,7 +64,7 @@ def launch_setup(context, *args, **kwargs):
                 {
                     'robot_description': urdf_contents,
                     'publish_frequency': 500.0,
-                    # 'use_sim_time': use_sim_time
+                    'use_sim_time': use_sim_time
                 }
         ]
     )
